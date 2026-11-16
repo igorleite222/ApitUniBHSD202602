@@ -80,3 +80,43 @@ Para o **Projeto A4**, o grupo deverá refatorar este monolito em uma **arquitet
      ```
 
 Após essa divisão, seu código estará preparado para escalar, integrando facilmente novas funcionalidades de segurança, como um proxy reverso Nginx, de forma totalmente estruturada e profissional.
+---
+
+## ✅ Projeto A4 — Refatoração para Arquitetura em Múltiplas Camadas
+
+Nesta etapa, a API foi refatorada, deixando a estrutura monolítica e passando a utilizar arquivos separados por responsabilidade.
+
+### 📂 Organização dos arquivos
+
+- **`main.py`**: inicialização do FastAPI e definição das rotas da API.
+- **`database.py`**: conexão com o banco de dados SQLite e criação da tabela `registros`.
+- **`models.py`**: definição dos modelos Pydantic utilizados para validação e estruturação dos dados.
+- **`.gitignore`**: configuração para ignorar arquivos temporários e o banco de dados local.
+
+### 🧪 Testes realizados
+
+A API foi executada utilizando Uvicorn e testada pela documentação interativa Swagger (`/docs`).
+
+Foram realizados testes das operações CRUD:
+
+- **POST `/registros`**: criação de registro — aprovado.
+- **GET `/registros`**: listagem de registros — aprovado.
+- **GET `/registros/{id}`**: consulta de registro por ID — aprovado.
+- **PUT `/registros/{id}`**: atualização de registro — aprovado.
+- **DELETE `/registros/{id}`**: exclusão de registro — aprovado.
+
+### ▶️ Como executar a versão A4
+
+No terminal, dentro da pasta do projeto, execute:
+
+```bash
+uv run uvicorn main:app --reload
+```
+
+A documentação interativa pode ser acessada em:
+
+`http://127.0.0.1:8000/docs`
+
+### 🌿 Controle de versão
+
+As alterações do Projeto A4 foram publicadas na branch `multicamadas` do repositório GitHub.
