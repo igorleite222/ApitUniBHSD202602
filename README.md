@@ -186,3 +186,52 @@ A arquitetura de observabilidade funciona da seguinte maneira:
 ### 6. Resultado
 
 A integração entre FastAPI, Prom
+## Observabilidade com Prometheus e Grafana
+
+O projeto possui recursos de observabilidade para monitorar o funcionamento da API.
+
+### Tecnologias utilizadas
+- **Prometheus:** coleta e armazena métricas da aplicação.
+- **Grafana:** permite visualizar as métricas em dashboards.
+- **Loguru:** registra informações e erros durante a execução da API.
+- **Prometheus FastAPI Instrumentator:** realiza a instrumentação da API.
+
+### Endpoint de métricas
+
+A API disponibiliza o endpoint:
+
+`/metrics`
+
+Esse endpoint apresenta métricas como:
+- Quantidade de requisições HTTP.
+- Códigos de resposta HTTP.
+- Tempo de duração das requisições.
+
+### Configuração do Prometheus
+
+O Prometheus utiliza o arquivo `monitoring/prometheus.yml`, com intervalo de coleta de 5 segundos e monitoramento do endpoint `/metrics` da API na porta 8000.
+
+### Execução
+
+Inicie a API em um terminal:
+
+`uv run uvicorn app.main:app --host 0.0.0.0 --port 8000`
+
+Em outro terminal, inicie os serviços de monitoramento:
+
+`docker compose up -d`
+
+### Acessos
+
+- API: porta 8000
+- Prometheus: porta 9090
+- Grafana: porta 3000
+
+### Dashboards
+
+O Grafana apresenta indicadores de:
+- Vazão de requisições.
+- Taxa de erros HTTP 4xx e 5xx.
+- Latência média das requisições.
+
+Esses indicadores permitem acompanhar o desempenho e identificar possíveis problemas na aplicação.
