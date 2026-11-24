@@ -129,3 +129,60 @@ Os testes foram realizados com sucesso no GitHub Codespaces:
 - Na segunda consulta, apresentou `HIT`, comprovando o funcionamento do cache.
 - Duas requisições POST foram encaminhadas para instâncias diferentes: uma na porta 8001 e outra na porta 8000, comprovando o balanceamento de carga.
 
+---
+
+## 📊 Atividade complementar — Observabilidade com Prometheus e Grafana
+
+Nesta atividade, foi implementada uma estrutura de observabilidade para monitorar a API RESTful desenvolvida com FastAPI, utilizando Prometheus para coleta de métricas e Grafana para visualização dos dados.
+
+### 1. Ferramentas utilizadas
+
+- **FastAPI:** aplicação responsável por disponibilizar os endpoints da API.
+- **Prometheus:** ferramenta responsável por coletar e armazenar as métricas da aplicação.
+- **Grafana:** ferramenta utilizada para criar dashboards e visualizar as métricas.
+- **Loguru:** biblioteca utilizada para registro de logs da aplicação, conforme a instrumentação implementada.
+- **Docker Compose:** utilizado para orquestrar os serviços de monitoramento.
+
+### 2. Instrumentação da API
+
+A API foi instrumentada para disponibilizar métricas de monitoramento por meio do endpoint:
+
+`/metrics`
+
+As métricas permitem acompanhar o comportamento e o desempenho da aplicação, incluindo:
+
+- Quantidade de requisições HTTP.
+- Taxa de erros HTTP (4xx e 5xx).
+- Tempo médio de resposta das requisições.
+
+### 3. Configuração do Prometheus
+
+Foi criado o arquivo `prometheus.yml` para configurar a coleta automática das métricas da API.
+
+O Prometheus foi configurado com intervalo de coleta de 5 segundos, utilizando o endpoint `/metrics` da aplicação FastAPI.
+
+O serviço de monitoramento foi disponibilizado na porta 9090.
+
+### 4. Integração com Grafana
+
+O Grafana foi conectado ao Prometheus como fonte de dados, permitindo consultar e visualizar as métricas coletadas pela API.
+
+Foi criado um dashboard com três painéis:
+
+- **Vazão de requisições:** apresenta a quantidade de requisições processadas por segundo.
+- **Taxa de erros HTTP:** monitora as respostas com códigos 4xx e 5xx.
+- **Latência média:** apresenta o tempo médio de resposta das requisições.
+
+### 5. Arquitetura utilizada
+
+A arquitetura de observabilidade funciona da seguinte maneira:
+
+1. O cliente realiza requisições à API FastAPI.
+2. A API registra métricas e disponibiliza os dados no endpoint `/metrics`.
+3. O Prometheus coleta periodicamente essas métricas.
+4. O Grafana consulta os dados armazenados no Prometheus.
+5. O dashboard apresenta informações sobre vazão, erros HTTP e latência.
+
+### 6. Resultado
+
+A integração entre FastAPI, Prom
